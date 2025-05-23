@@ -1,0 +1,1 @@
+export const Admin = () => <div>ADMIN</div>
