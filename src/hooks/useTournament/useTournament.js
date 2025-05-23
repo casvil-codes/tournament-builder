@@ -32,7 +32,19 @@ export function useTournament() {
           return [slot, ""];
         })
       );
-      await update(tournament, { Players: players, name: tournamentData.name });
+      await update(tournament, { Players: players, name: tournamentData.name, numPlayers: tournamentData.numPlayers });
+    } catch (error) {
+      console.error("Failed to update match score:", error);
+      throw error;
+    }
+  };
+
+  const setPlayersConfig = async (players) => {
+    try {
+      const db = getDatabase(app);
+      const tournament = ref(db, `Tournament`);
+
+      await update(tournament, { Players: players });
     } catch (error) {
       console.error("Failed to update match score:", error);
       throw error;
@@ -40,5 +52,5 @@ export function useTournament() {
   };
 
 
-  return { loading, tournament, setTournamentConfig };
+  return { loading, tournament, setTournamentConfig, setPlayersConfig };
 }
