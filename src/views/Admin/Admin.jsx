@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useTournament } from "../../hooks/useTournament/useTournament";
-import { EditTournament } from "../../components/EditTournament";
+import { EditTournament } from "../../components/EditTournament/EditTournament";
 import { EditPlayers } from "../../components/EditPlayers";
 
 export const Admin = () => {
