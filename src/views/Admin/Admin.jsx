@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTournament } from "../../hooks/useTournament/useTournament";
 import { EditTournament } from "../../components/EditTournament/EditTournament";
 import { EditPlayers } from "../../components/EditPlayers";
-import { Home } from "../Home/Home";
-import { EditResults } from "../../components/EditResults";
+import "./Admin.css";
 
 export const Admin = () => {
   const { loading, tournament } = useTournament();
@@ -17,37 +16,46 @@ export const Admin = () => {
   };
 
   return (
-    <div>
-      <ul>
-        <li onClick={() => setCurrentSection("edit-tournament")}>
-          {activeSection === "edit-tournament" ? (
-            <b>Editar torneig</b>
-          ) : (
-            "Editar torneig"
-          )}
-        </li>
-        <li onClick={() => setCurrentSection("edit-players")}>
-          {activeSection === "edit-players" ? (
-            <b>edit-players</b>
-          ) : (
-            "edit-players"
-          )}
-        </li>
-        <li onClick={() => setCurrentSection("edit-results")}>
-          {activeSection === "edit-results" ? (
-            <b>Editar resultats</b>
-          ) : (
-            "edit-results"
-          )}
-        </li>
-        <li onClick={() => setCurrentSection("user-view")}>
-          {activeSection === "user-view" ? <b>vista usuari</b> : "user-view"}
-        </li>
-      </ul>
-      {activeSection === "edit-tournament" ? <EditTournament /> : null}
-      {activeSection === "edit-players" ? <EditPlayers /> : null}
-      {activeSection === "edit-results" ? <EditResults /> : null}
-      {activeSection === "user-view" ? <Home /> : null}
+    <div className="admin-panel">
+      <nav className="admin-nav">
+        <button
+          className={`admin-nav-button ${
+            activeSection === "edit-tournament" ? "active" : ""
+          }`}
+          onClick={() => setCurrentSection("edit-tournament")}
+        >
+          Editar torneig
+        </button>
+        <button
+          className={`admin-nav-button ${
+            activeSection === "edit-players" ? "active" : ""
+          }`}
+          onClick={() => setCurrentSection("edit-players")}
+        >
+          Editar jugadors
+        </button>
+        <button
+          className={`admin-nav-button ${
+            activeSection === "edit-results" ? "active" : ""
+          }`}
+          onClick={() => setCurrentSection("edit-results")}
+        >
+          Editar resultats
+        </button>
+        <button
+          className={`admin-nav-button ${
+            activeSection === "user-view" ? "active" : ""
+          }`}
+          onClick={() => setCurrentSection("user-view")}
+        >
+          Vista usuari
+        </button>
+      </nav>
+
+      <div className="admin-panel-content">
+        {activeSection === "edit-tournament" && <EditTournament />}
+        {activeSection === "edit-players" && <EditPlayers />}
+      </div>
     </div>
   );
 };
