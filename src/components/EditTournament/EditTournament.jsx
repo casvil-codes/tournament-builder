@@ -6,7 +6,7 @@ import "./EditTournament.css";
 export const EditTournament = () => {
   const { loading, tournament, setTournamentConfig } = useTournament();
   const [name, setName] = useState("");
-  const [numPlayers, setNumPlayers] = useState(null);
+  const [numPlayers, setNumPlayers] = useState(4);
 
   useEffect(() => {
     if (!tournament) return () => {};
@@ -25,7 +25,7 @@ export const EditTournament = () => {
     await setTournamentConfig(tournamentData);
   };
 
-  if (loading || !tournament) return null;
+  if (loading) return null;
 
   return (
     <div className="edit-tournament-container">

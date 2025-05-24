@@ -8,7 +8,7 @@ export function useTournament() {
 
   useEffect(() => {
     const db = getDatabase(app);
-    const tournamentRef = ref(db, "/Tournament");
+    const tournamentRef = ref(db, 'Tournament');
 
     const unsubscribe = onValue(tournamentRef, (snapshot) => {
       setTournament(snapshot.val());
@@ -25,14 +25,14 @@ export function useTournament() {
   const setTournamentConfig = async (tournamentData) => {
     try {
       const db = getDatabase(app);
-      const tournament = ref(db, `Tournament`);
+      const tournament = ref(db, `/`);
       const players = Object.fromEntries(
         Array.from({ length: tournamentData.numPlayers }, (_, i) => {
           const slot = String.fromCharCode(65 + i); // 65 = 'A'
           return [slot, ""];
         })
       );
-      await update(tournament, { Players: players, name: tournamentData.name, numPlayers: tournamentData.numPlayers });
+      await update(tournament, {Tournament: { Players: players, name: tournamentData.name, numPlayers: tournamentData.numPlayers }});
     } catch (error) {
       console.error("Failed to update match score:", error);
       throw error;
