@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 
 import { Home } from './views/Home/Home.jsx';
 import { Admin } from './views/Admin/Admin.jsx';
-// import './index.css'
+import './index.css'
 
 const router = createBrowserRouter([
   {

@@ -1,0 +1,69 @@
+
+.edit-tournament-container {
+  max-width: 36rem;
+  margin: 2.5rem auto;
+  background-color: #3e2f20; /* dark brown */
+  color: #f5e9d3; /* parchment */
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 4px solid #cfa65b; /* gold */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.edit-tournament-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e0c072;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.edit-tournament-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.edit-tournament-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.edit-tournament-input,
+.edit-tournament-select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #5b4636; /* warm brown */
+  color: #ffffff;
+  border: 1px solid #cfa65b;
+  outline: none;
+  font-size: 1rem;
+}
+
+.edit-tournament-input::placeholder {
+  color: #d4d4d4;
+}
+
+.edit-tournament-input:focus,
+.edit-tournament-select:focus {
+  border-color: #e0c072;
+  box-shadow: 0 0 0 2px #e0c072;
+}
+
+.edit-tournament-button {
+  background-color: #cfa65b;
+  color: #3e2f20;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-tournament-button:hover {
+  background-color: #e0c072;
+}
