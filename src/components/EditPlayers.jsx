@@ -23,6 +23,26 @@ export const EditPlayers = () => {
 
   if (loading || !tournament || !tournament.Players) return null;
 
+  const shufflePlayerValues = () => {
+    // Extraer los valores en un array
+    const values = Object.values(players);
+
+    // Función para mezclar un array usando el algoritmo de Fisher-Yates
+    for (let i = values.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [values[i], values[j]] = [values[j], values[i]];
+    }
+
+    // Crear un nuevo objeto con las keys originales y los valores mezclados
+    const keys = Object.keys(players);
+    const shuffledPlayers = {};
+    keys.forEach((key, index) => {
+      shuffledPlayers[key] = values[index];
+    });
+
+    setPlayers(shuffledPlayers);
+  };
+
   return (
     <div>
       <div>
@@ -39,8 +59,11 @@ export const EditPlayers = () => {
               />
             </div>
           ))}
-
-          <button type="submit">Actualizar jugadores</button>
+          <br />
+          <button onClick={shufflePlayerValues}>Barreja jugadors</button>
+          <br />
+          <br />
+          <button type="submit">Guardar canvis</button>
         </form>
       </div>
     </div>

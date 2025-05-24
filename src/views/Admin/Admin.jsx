@@ -5,10 +5,10 @@ import { EditTournament } from "../../components/EditTournament";
 import { EditPlayers } from "../../components/EditPlayers";
 
 export const Admin = () => {
-  const { loading, tournament, setTournamentConfig } = useTournament();
+  const { loading, tournament } = useTournament();
   const [activeSection, setActiveSection] = useState("edit-tournament");
 
-  if (loading || !tournament) return null;
+  if (loading) return null;
 
   const setCurrentSection = (section) => {
     setActiveSection(section);
