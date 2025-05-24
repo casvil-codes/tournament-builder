@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useTournament } from "../../hooks/useTournament/useTournament";
 import { EditTournament } from "../../components/EditTournament/EditTournament";
 import { EditPlayers } from "../../components/EditPlayers";
+import { Home } from "../Home/Home";
+import { EditResults } from "../../components/EditResults";
 
 export const Admin = () => {
   const { loading, tournament, setTournamentConfig } = useTournament();
@@ -44,6 +46,8 @@ export const Admin = () => {
       </ul>
       {activeSection === "edit-tournament" ? <EditTournament /> : null}
       {activeSection === "edit-players" ? <EditPlayers /> : null}
+      {activeSection === "edit-results" ? <EditResults /> : null}
+      {activeSection === "user-view" ? <Home /> : null}
     </div>
   );
 };
