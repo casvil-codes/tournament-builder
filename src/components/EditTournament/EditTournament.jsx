@@ -4,7 +4,8 @@ import { useTournament } from "../../hooks/useTournament/useTournament";
 import "./EditTournament.css";
 
 export const EditTournament = () => {
-  const { loading, tournament, setTournamentConfig } = useTournament();
+  const { loading, tournament, setTournamentConfig, deleteTournament } =
+    useTournament();
   const [name, setName] = useState("");
   const [numPlayers, setNumPlayers] = useState(4);
 
@@ -23,6 +24,12 @@ export const EditTournament = () => {
     };
 
     await setTournamentConfig(tournamentData);
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    await deleteTournament();
   };
 
   if (loading) return null;
@@ -56,6 +63,7 @@ export const EditTournament = () => {
         <button type="submit" className="edit-tournament-button">
           Actualizar torneo
         </button>
+        <button onClick={handleDelete}>Borrar torneig</button>
       </form>
     </div>
   );

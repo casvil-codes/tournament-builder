@@ -48,7 +48,7 @@ export const EditPlayers = () => {
       <div>
         <h2>Editar jugadores</h2>
         <form onSubmit={handleSubmit}>
-          {Object.entries(tournament.Players).map(([key, value]) => (
+          {Object.entries(players).map(([key, value]) => (
             <div key={key}>
               <label>Jugador {key}</label>
               <input
