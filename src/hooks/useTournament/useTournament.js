@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDatabase, ref, onValue, off , update} from "firebase/database";
+import { getDatabase, ref, onValue, off , update, remove} from "firebase/database";
 import { app } from "../../firebase/config.js";
 
 export function useTournament() {
@@ -24,20 +24,53 @@ export function useTournament() {
 
   const setTournamentConfig = async (tournamentData) => {
     try {
-      const db = getDatabase(app);
-      const tournament = ref(db, `/`);
-      const players = Object.fromEntries(
-        Array.from({ length: tournamentData.numPlayers }, (_, i) => {
-          const slot = String.fromCharCode(65 + i); // 65 = 'A'
-          return [slot, ""];
-        })
-      );
-      await update(tournament, {Tournament: { Players: players, name: tournamentData.name, numPlayers: tournamentData.numPlayers }});
+        const db = getDatabase(app);
+        const tournamentRef = ref(db, `/Tournament`);
+
+        // Mantener jugadores existentes si hay, o crear nuevos
+        const players = Array.from({ length: tournamentData.numPlayers })
+            .reduce((acc, _, i) => {
+                const slot = String.fromCharCode(65 + i);
+                acc[slot] = tournament.Players?.[slot] || "";
+                return acc;
+            }, {});
+
+        // Generar automáticamente los partidos de la primera ronda si no existen
+        const matches = tournament.Matches || { Round1: [] };
+        if (!tournament.Matches) {
+            matches.Round1 = Object.keys(players)
+                .map((player, index, arr) => {
+                    return index % 2 === 0 && arr[index + 1]
+                        ? { [player]: "0", [arr[index + 1]]: "0" }
+                        : null;
+                })
+                .filter(match => match !== null);
+        }
+
+        // Guardar la configuración actualizada en Firebase
+        await update(tournamentRef, {
+          Players: players,
+          name: tournamentData.name, // Se puede editar
+          numPlayers: tournamentData.numPlayers, // Se puede editar
+          Matches: matches // Mantiene los datos previos o crea nuevos
+        });
     } catch (error) {
-      console.error("Failed to update match score:", error);
-      throw error;
+        console.error("Failed to update tournament configuration", error);
+        throw error;
     }
-  };
+};
+
+
+  const deleteTournament = async () => {
+    try {
+        const db = getDatabase(app);
+        const tournamentRef = ref(db, `/Tournament`);
+        await remove(tournamentRef);
+    } catch (error) {
+        console.error("Failed to delete tournament", error);
+        throw error;
+    }
+};
 
   const setPlayersConfig = async (players) => {
     try {
@@ -51,6 +84,18 @@ export function useTournament() {
     }
   };
 
+  const setMatchesScore = async (matches) => {
+    try {
+      const db = getDatabase(app);
+      const tournament = ref(db, `Tournament`);
 
-  return { loading, tournament, setTournamentConfig, setPlayersConfig };
+      await update(tournament, { Matches: matches });
+    } catch (error) {
+      console.error("Failed to update match score:", error);
+      throw error;
+    }
+  };
+
+
+  return { loading, tournament, setTournamentConfig, setPlayersConfig, setMatchesScore, deleteTournament };
 }

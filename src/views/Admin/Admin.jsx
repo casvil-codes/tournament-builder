@@ -4,6 +4,8 @@ import { useTournament } from "../../hooks/useTournament/useTournament";
 import { EditTournament } from "../../components/EditTournament/EditTournament";
 import { EditPlayers } from "../../components/EditPlayers";
 import "./Admin.css";
+import { EditResults } from "../../components/EditResults";
+import { Home } from "../../views/Home/Home";
 
 export const Admin = () => {
   const { loading, tournament } = useTournament();
@@ -55,6 +57,8 @@ export const Admin = () => {
       <div className="admin-panel-content">
         {activeSection === "edit-tournament" && <EditTournament />}
         {activeSection === "edit-players" && <EditPlayers />}
+        {activeSection === "edit-results" && <EditResults />}
+        {activeSection === "user-view" && <Home />}
       </div>
     </div>
   );
