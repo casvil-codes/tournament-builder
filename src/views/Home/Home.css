@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-image: url('./wood.png');
+  background-image: url('/src/assets/wood.png');
   height: 100vh;
   width: 100vw;
   background-size: cover;          /* Escala para cubrir todo el contenedor */
