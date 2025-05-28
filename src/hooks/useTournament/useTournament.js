@@ -96,6 +96,37 @@ export function useTournament() {
     }
   };
 
+  const transformMatchesToRounds = (matches) => {
+    const rounds = Object.keys(matches)
+      .filter((key) => key.startsWith("Round"))
+      .sort((a, b) => {
+        // Ordenar por número de ronda
+        const numA = parseInt(a.replace("Round", ""), 10);
+        const numB = parseInt(b.replace("Round", ""), 10);
+        return numA - numB;
+      })
+      .map((roundKey, roundIndex) => {
+        const roundMatches = matches[roundKey];
+  
+        return {
+          title: `Round ${roundIndex + 1}`,
+          seeds: roundMatches.map((match, matchIndex) => {
+            const players = Object.keys(match);
+            return {
+              id: matchIndex + 1,
+              teams: players.map((playerId) => ({
+                name: tournament.Players[playerId],
+                score: Number(match[playerId]), // opcional, si quieres mostrar el score
+              })),
+            };
+          }),
+        };
+      });
+      console.log(rounds)
+    return rounds;
+  };
+  
 
-  return { loading, tournament, setTournamentConfig, setPlayersConfig, setMatchesScore, deleteTournament };
+
+  return { loading, tournament, setTournamentConfig, setPlayersConfig, setMatchesScore, deleteTournament, transformMatchesToRounds };
 }

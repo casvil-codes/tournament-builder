@@ -1,8 +1,43 @@
-.winner {
-    font-weight: bold;
-    color: #d4af37; /* Oro */
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 4px 8px;
-    border-radius: 4px;
-  }
+.home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-image: url('./wood.png');
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;          /* Escala para cubrir todo el contenedor */
+  background-repeat: no-repeat;    /* No repetir la imagen */
+  background-position: center;     /* Centra la imagen */
+  image-rendering: auto;           /* Usa la mejor calidad de renderizado posible */
+  -webkit-image-rendering: auto;
+  -moz-image-rendering: auto;
+  padding-top: 3em;
+}
+
+
+.home h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #e0c072;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  text-shadow: 1px 1px 2px #3a2a10;
+  border-bottom: 2px solid #cfa65b;
+  padding-bottom: 0.5rem;
+}
+
+.home span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d1b966;
+  text-shadow: 0 1px 0 #3a2a10;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+/* .brackets-wrapper > :first-child{
+  padding-top: 2em;
+  display: flex;
+  justify-content: center;
+} */
   
